@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rise | Ballard Sourdough</title>
+<meta name="description" content="Freshly baked sourdough bread and pastries from the heart of Ballard, Seattle.">
+<meta name="generator" content="Aitherium studio (page spec v1)">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Aitherium/awkit@a4611a70697fbebdca3743595a6a9f0ecb2a163d/src/awkit-vars.css" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Aitherium/awkit@a4611a70697fbebdca3743595a6a9f0ecb2a163d/src/awkit-base.css" crossorigin="anonymous">
+<style>
+:root { --bg-deep:#1f160f; --bg-base:#1f160f; --text-primary:#a98a70;
+  --accent-primary:#ff9f43; --accent-secondary:#64d8d4; }
+body { margin:0; background:#1f160f; color:#a98a70; font:16px/1.6 Georgia, 'Times New Roman', serif; }
+main { max-width:980px; margin:0 auto; padding:24px 16px 48px; display:grid; gap:24px; }
+.hero { padding:56px 0 24px; } .hero h1 { font-size:clamp(28px,6vw,52px); line-height:1.1; margin:0 0 12px; }
+.lede { font-size:18px; opacity:.85; max-width:60ch; }
+.btn-primary { background:#ff9f43; color:#1f160f; border-color:#ff9f43; }
+a { color:#ff9f43; } .card { padding:16px 18px; border-radius:12px; } .card h3 { margin-top:0; }
+.panel { padding:20px; border-radius:14px; }
+.grid-cards { display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+figure.card { margin:0; padding:0; overflow:hidden; } figure.card img { width:100%; display:block; }
+.aw-form { display:grid; gap:12px; max-width:520px; }
+.aw-form label { display:grid; gap:4px; }
+.aw-form input, .aw-form textarea { padding:10px; border-radius:8px; border:1px solid var(--border-default,#556);
+  background:transparent; color:inherit; font:inherit; }
+.aw-agent { width:100%; height:520px; border:1px solid var(--border-default,#556); border-radius:12px; }
+.aw-small, footer { font-size:13px; opacity:.75; }
+footer { max-width:980px; margin:0 auto; padding:16px; }
+</style>
+</head>
+<body>
+<main>
+<header class="hero animate-in"><h1>Fresh Bread &amp; Sourdough</h1><p class="lede">Baked fresh every day in Ballard, Seattle.</p></header>
+<section><h2>Our Specials</h2><div class="grid-cards"><div class="card"><h3>Sourdough Bread</h3><p>Made with traditional sourdough and fresh ingredients.</p></div><div class="card"><h3>Pastries</h3><p>A variety of freshly baked pastries from our shop.</p></div></div></section>
+<section class="panel"><h2>Contact Us</h2><form class="aw-form" data-relay-form=""><label>Name<input name="name" type="text" required></label><label>Email<input name="email" type="email" required></label><label>Message<textarea name="message" rows="4" required></textarea></label><button class="btn btn-primary" type="submit">Send</button><p class="aw-form-status" role="status"></p></form><p class="badge badge-pending">Form not connected yet</p></section>
+</main>
+<footer>Built with the Aitherium studio &middot; <a href="https://app.aitherium.com/?app=spaces&amp;u=studioproof1115">Made by this Space</a></footer>
+<script>document.querySelectorAll('form[data-relay-form]').forEach(function(f){
+  f.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var url = f.getAttribute('data-relay-form'), st = f.querySelector('.aw-form-status');
+    if (!url) { st.textContent = 'This form is not connected yet.'; return; }
+    var answers = {}; new FormData(f).forEach(function(v,k){ answers[k] = String(v); });
+    fetch(url, {method:'POST', headers:{'content-type':'application/json'},
+                body: JSON.stringify({answers: answers})})
+      .then(function(r){ st.textContent = r.ok ? 'Thanks, we got it.' : 'Could not send (' + r.status + ').'; })
+      .catch(function(){ st.textContent = 'Could not send. Please try again.'; });
+  });
+});</script>
+</body>
+</html>
